@@ -16,6 +16,8 @@ dos letras iguales seguidas)
 El programa recibe dos instrucciones y un mensaje, y el resultado debe ser si existe o no una
 instrucción escondida en el mensaje.
 
+Ingresa los datos M1,M2 y N para poder añadir la cantidad de caracteres que tendran las instucciones y el mensaje al final
+
 2-. Existe un juego en el que hay dos jugadores y varias rondas en los que cada jugador obtiene
 una puntuación. Al final de cada ronda se observa el acumulado de la puntuación y la
 diferencia. Al terminar el juego quien gana es aquel que haya conseguido la mayor ventaja
@@ -25,3 +27,6 @@ El ganador en este caso sería el Jugador 1 ya que el obtuvo la máxima ventaja 
 la primera ronda durante el juego.
 El programa recibe los marcadores y deberá indicar el ganador (no hay empates, se puede
 asumir siempre existe un ganador único)
+
+Se debe añadir cuantas rondas tendra el partido una vez añadido se le pedira que ingrese los resultados de ronda a ronda y al final al terminar 
+arrojara el resultado de quien gano al dar click en el boton de Calcular 
