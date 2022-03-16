@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Ejercicios</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    
+</head>
+<body>
+
+  <p style="padding: 40px;">Ejercicio 1.</p>
+  <div class="row">
+    <div class="col-12">
+      <div class="col-12">
+        <label>M1</label>
+        <input class="col-6" id="m1" class="form-control" type="number">
+        <br>
+        <label>M2</label>
+        <input class="col-6" id="m2" class="form-control" type="number">
+        <br>
+        <label>N</label>
+        <input class="col-6" id="n" class="form-control" type="number">
+        <br>
+      <div class="col-12">
+        <label>1era Intrucción:</label>
+        <input class="col-6" id="fI" class="form-control" type="text">
+        <br>
+        <label>2da Intrucción:</label>
+        <input class="col-6" id="sI" class="form-control" type="text">
+        <br>
+        <label>Mensaje:</label>
+        <input class="col-6" id="message" class="form-control" type="text">
+      </div>
+      <div class="col-12 text-right"><input type="button" onclick="encryptD()" class="btn btn-success" value="Continuar"></div>
+
+      <p id="valueInput1"></p> 
+      <p id="valueInput2"></p> 
+    </div>
+
+</div>
+</hr>
+<p style="padding: 40px;">Ejercicio 2.</p>
+  <div class="row">
+        <div class="col-12">
+            <label>Ingresa total de rondas</label>
+            <input id="myInput" class="form-control" type="number">
+        </div>
+    
+    </div>
+    
+    <div class="row" id="content" style="padding: 40px;"></div>
+    <p id="valueInput" style="padding: 40px;"></p> 
+    
+ 
+</body>
+</html>
+<script> 
+
+function encryptD(){
+  let m1 = Number($("#m1").val());
+  let m2 = Number($("#m2").val());
+  let n = Number($("#n").val());
+  let fI = $("#fI").val();
+  let sI = $("#sI").val();
+  let message = $("#message").val();
+    if(((fI.length)===m1) && ((sI.length)===m2) && ((message.length)===n)){
+    let cadenaMessage = message.replace(/(.)\1+/gmi, "$1");
+    let exist1 = cadenaMessage.includes(fI);
+    let exist2 = cadenaMessage.includes(sI);
+     if(exist1){
+      document.getElementById("valueInput1").innerHTML = 'SI, La primer instrucción se encuentra escondida en el mensaje'; 
+       console.log('SI');
+     }else{
+      document.getElementById("valueInput1").innerHTML = 'NO, La primer instrucción no se encuentra escondida en el mensaje'; 
+       console.log('NO')
+     }
+    
+    if(exist2){
+      document.getElementById("valueInput2").innerHTML = 'SI, La segunda instrucción se encuentra escondida en el mensaje'; 
+       console.log('SI');
+     }else{
+      document.getElementById("valueInput2").innerHTML = 'NO, La segunda instrucción no se encuentra escondida en el mensaje'; 
+       console.log('NO')
+     }
+    }
+  }
+  
+
+$(function(){
+
+
+$("#myInput").change(function(){
+var cantidad = $("#myInput").val();
+  $("#mySelect").val(cantidad);
+  RenderInputs(cantidad);
+});
+
+});
+
+function RenderInputs(cantidad){
+$('#content').html('');
+for (var i = 0; i < cantidad; i++) {
+$('#content').append('<div class="col-6" style="padding:1%">');
+      $('#content').append('<label> Resultado de Ronda ' + (i+1) + '</label>');
+      $('#content').append('<input class="col form-control" placeholder="Jugador 1" type="number" id="inputJugador1'+(i+1)+'"/>');
+      $('#content').append('<input class="col form-control" placeholder="Jugador 2" type="number" id="inputJugador2'+(i+1)+'"/>');
+      $('#content').append('</div>');
+}
+$('#content').append('<div class="col-12 text-right"><input type="button" onclick="calcular()" class="btn btn-success" value="Calcular"></div>');
+
+}
+
+function calcular(){
+  var cantidad =$("#myInput").val();
+  let sum1,sum2,diferent=0;
+  let arrayR=[];
+  let arrayD=[];
+  for(let i = 0; i<cantidad;i++){
+    sum1=Number($("#inputJugador1"+(i+1)).val());
+    sum2=Number($("#inputJugador2"+(i+1)).val());
+    if(sum2>sum1){
+      diferent=sum2-sum1
+    }else{
+      diferent = sum1 - sum2;
+    }
+
+    let data={
+      Jugador1:sum1,
+      Jugador2:sum2,
+      diferencia:diferent
+    }
+    arrayR.push(data)
+
+  }
+  console.log(arrayR)
+    for(let j=0;j<arrayR.length;j++){
+      arrayD.push(arrayR[j].diferencia);
+    }
+  console.log(arrayD)
+
+  var m = Math.max(...arrayD);
+    let rowG=null;
+    let ganador=[];
+  for(let h=0;h<arrayR.length;h++){
+    if(arrayR[h].Jugador2>arrayR[h].Jugador1){
+      rowG=arrayR[h].Jugador2-arrayR[h].Jugador1
+    }else{
+      rowG = arrayR[h].Jugador1 - arrayR[h].Jugador2;
+    }
+    if(rowG===m){
+      console.log('Encontro ganador')
+      ganador.push(arrayR[h]);
+      console.log(ganador)
+      break;
+    }
+    }
+    let win=0
+    if(ganador[0].Jugador1>ganador[0].Jugador2){
+      win=1
+  }else{
+    win=2
+  }
+
+    console.log('Ganador: ' + win, 'Ventaja: ' +m);
+    document.getElementById("valueInput").innerHTML = 'Ganador: ' + win + ' Ventaja: ' +m; 
+
+  }
+
+  
+    
+  </script> 
+<style>
+    form {
+  /* Centrar el formulario en la página */
+  margin: 0 auto;
+  width: 400px;
+  /* Esquema del formulario */
+  padding: 1em;
+  border: 1px solid #CCC;
+  border-radius: 1em;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+form li + li {
+  margin-top: 1em;
+}
+
+label {
+  /* Tamaño y alineación uniforme */
+  display: inline-block;
+  width: 90px;
+  text-align: right;
+}
+
+input,
+textarea {
+  /* Para asegurarse de que todos los campos de texto tienen la misma configuración de letra
+     Por defecto, las áreas de texto tienen un tipo de letra monoespaciada */
+  font: 1em sans-serif;
+
+  /* Tamaño uniforme del campo de texto */
+  width: 300px;
+  box-sizing: border-box;
+
+  /* Hacer coincidir los bordes del campo del formulario */
+  border: 1px solid #999;
+}
+
+input:focus,
+textarea:focus {
+  /* Destacado adicional para elementos que tienen el cursor */
+  border-color: #000;
+}
+
+textarea {
+  /* Alinear los campos de texto multilínea con sus etiquetas */
+  vertical-align: top;
+
+  /* Proporcionar espacio para escribir texto */
+  height: 5em;
+}
+
+.button {
+  /* Alinear los botones con los campos de texto */
+  padding-left: 90px; /* mismo tamaño que los elementos de la etiqueta */
+}
+
+button {
+  /* Este margen adicional representa aproximadamente el mismo espacio que el espacio
+     entre las etiquetas y sus campos de texto */
+  margin-left: .5em;
+}
+</style>
